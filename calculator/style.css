@@ -1,0 +1,271 @@
+/* Reset and Base Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #6a8fec;
+    overflow: hidden;
+    perspective: 1000px; /* Crucial for enabling 3D space rendering */
+}
+body {
+    background-color: #4972bd; /* A very light grey/blue */
+    overflow: hidden; /* Prevents scrollbars if shapes go outside */
+    position: relative;
+}
+
+body {
+    background: radial-gradient(circle at center, #365f8b 0%, #3c66af 100%);
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background: #0e4477; /* Deep blue base background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Ensures bubbles don't create scrollbars */
+    position: relative;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    /* Use a darker background to make the light bubbles pop */
+    background: #091122; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Base style for all bubbles */
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px); /* Increased blur for a softer, larger glow */
+    opacity: 0.8;        /* Increased opacity to make them more visible */
+    z-index: -1;
+}
+
+.b1 {
+    width: 500px;
+    height: 500px;
+    background: #0077ff; 
+    top: -100px;
+    right: 5%;
+}
+
+.b2 {
+    width: 400px;
+    height: 400px;
+    background: #7000ff;
+    bottom: -50px;
+    left: 5%;
+}
+
+.b3 {
+    width: 350px;
+    height: 350px;
+    background: #00d4ff;
+    top: 40%;
+    left: 40%;
+}
+
+.calculator-container {
+    background: rgba(197, 220, 253, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(182, 199, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(185, 211, 250, 0.37);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+/* Animated Cartoonish Background Components */
+.bg-animation {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    filter: blur(80px); /* Gives the smooth, cartoon-pop ambient look */
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: floatAround 20s infinite alternate ease-in-out;
+}
+
+.blob-1 {
+    width: 400px;
+    height: 400px;
+    background: #072846;
+    top: -10%;
+    left: -10%;
+}
+
+.blob-2 {
+    width: 500px;
+    height: 500px;
+    background: #510475;
+    bottom: -20%;
+    right: -10%;
+    animation-delay: -5s;
+}
+
+.blob-3 {
+    width: 300px;
+    height: 300px;
+    background: #3e0a72;
+    top: 40%;
+    left: 50%;
+    animation-delay: -10s;
+}
+
+@keyframes floatAround {
+    0% { transform: translate(0px, 0px) scale(1); }
+    50% { transform: translate(60px, -80px) scale(1.2); }
+    100% { transform: translate(-40px, 40px) scale(0.9); }
+}
+
+/* 3D Calculator Frame Styling */
+.calculator-container {
+    transform: rotateX(15deg) rotateY(-10deg); /* Angles the unit slightly for structural depth */
+    transition: transform 0.5s ease;
+}
+
+.calculator-container:hover {
+    transform: rotateX(10deg) rotateY(-5deg); /* Dynamic subtle hover tilt */
+}
+
+.calculator-3d {
+    width: 360px;
+    background: linear-gradient(135deg, #0e144e, #2f56b3);
+    padding: 25px;
+    border-radius: 24px;
+    /* Layered multi-shadow technique to generate 3D block thickness */
+    box-shadow: 
+        -1px 1px 0px #333349,
+        -2px 2px 0px #334155,
+        -3px 3px 0px #334155,
+        -4px 4px 0px #1e293b,
+        -5px 5px 0px #1e293b,
+        -15px 20px 30px rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Glassmorphism Calculator Display Screen */
+.screen {
+    background: rgba(11, 18, 36, 0.6);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 25px;
+    text-align: right;
+    word-wrap: break-word;
+    word-break: break-all;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.previous-operand {
+    color: #92abce;
+    font-size: 1.1rem;
+    min-height: 24px;
+}
+
+.current-operand {
+    color: #ffffff;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-top: 5px;
+    text-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
+}
+
+/* Layout Button Matrix */
+.buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.span-two {
+    grid-column: span 2;
+}
+
+/* 3D Button Mechanics */
+.btn {
+    cursor: pointer;
+    font-size: 1.25rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    padding: 16px 0;
+    background: #334155;
+    color: #f8fafc;
+    position: relative;
+    /* Generates base thickness underneath the individual keys */
+    box-shadow: 0px 5px 0px #1e293b, 0px 8px 10px rgba(0, 0, 0, 0.4);
+    transition: all 0.1s ease;
+}
+
+.btn:active {
+    /* Simulates physically pressing the button into the chassis */
+    transform: translateY(4px);
+    box-shadow: 0px 1px 0px #1e293b, 0px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* Distinctive Branding Key Variant Colors */
+.btn-operator {
+    background: #772dbb;
+    color: #fff;
+    box-shadow: 0px 5px 0px #4c1d95, 0px 8px 10px rgba(0, 0, 0, 0.4);
+}
+.btn-operator:active {
+    box-shadow: 0px 1px 0px #4c1d95, 0px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.btn-clear {
+    background: #ef4444;
+    color: #fff;
+    box-shadow: 0px 5px 0px #991b1b, 0px 8px 10px rgba(0, 0, 0, 0.4);
+}
+.btn-clear:active {
+    box-shadow: 0px 1px 0px #991b1b, 0px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.btn-delete {
+    background: #f59e0b;
+    color: #fff;
+    box-shadow: 0px 5px 0px #b45309, 0px 8px 10px rgba(0, 0, 0, 0.4);
+}
+.btn-delete:active {
+    box-shadow: 0px 1px 0px #b45309, 0px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.btn-equals {
+    background: linear-gradient(135deg, #00f2fe, #4facfe);
+    color: #0f172a;
+    box-shadow: 0px 5px 0px #0072b5, 0px 8px 10px rgba(0, 0, 0, 0.4);
+}
+.btn-equals:active {
+    box-shadow: 0px 1px 0px #0072b5, 0px 2px 5px rgba(0, 0, 0, 0.4);
+}

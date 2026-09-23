@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duryab Shah — Interactive Portfolio</title>
+    
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Dynamic 3D Interactive Canvas Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Scroll Progress Indicator -->
+    <div id="progress-bar"></div>
+
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-brand">DS<span class="brand-dot">.</span>dev</a>
+            
+            <nav class="nav-links">
+                <article class="about_ glassmorphism">
+                <a href="#about">Philosophy</a>                
+                <a href="#projects">Work</a>
+                <a href="#skills">Tech Stack</a>
+                <a href="#contact">Contact</a>
+            </nav>
+
+            <div class="nav-actions">
+                <!-- Dark / Light Theme Switcher Button -->
+                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle light and dark theme">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+                </button>
+
+                <div class="menu-toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-container">
+            <div class="profile-glow-wrapper">
+                <img src="profile.png.jpeg" alt="Duryab Shah" class="profile-photo" onerror="this.src='https://via.placeholder.com/150/1e293b/6366f1?text=DS'">
+            </div>
+
+            <div class="badge-status glass-subheading">
+                <span class="pulse-dot"></span> Available for Web Projects
+            </div>
+
+            <h1 class="hero-title">Duryab <span class="gradient-text">Shah</span></h1>
+            <p class="hero-role glass-subheading">Creative Frontend Developer &amp; UI Specialist</p>
+            <p class="hero-description">Building performance-focused digital interfaces, scalable web applications, and smooth interactive experiences.</p>
+
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">View Works</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section section-reveal" id="about">
+        <div class="container">
+            <div class="section-heading">
+                <span class="section-tag glass-subheading">// PHILOSOPHY</span>
+                <h2>Engineering Meets Design</h2>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-card glassmorphism">
+                    <div class="card-icon">⚡</div>
+                    <h3 class="glass-subheading">High Performance</h3>
+                    <p>Optimized DOM structure, low bundle overhead, and fast paint times ensure every site loads with lightning speed.</p>
+                </div>
+                <div class="about-card glassmorphism">
+                    <div class="card-icon">🎨</div>
+                    <h3 class="glass-subheading">Responsive Architecture</h3>
+                    <p>Crafting adaptable layouts using modern CSS Grid and Flexbox to guarantee seamless functionality across all desktop and mobile displays.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section section-reveal" id="projects">
+        <div class="container">
+            <div class="section-heading">
+                <span class="section-tag glass-subheading">// PORTFOLIO</span>
+                <h2>Selected Projects</h2>
+            </div>
+
+            <div class="project-grid">
+                <!-- Project 1: Calculator -->
+                <article class="project-card glassmorphism">
+                    <div class="project-badge glass-subheading">Web App</div>
+                    <h3 class="glass-subheading">Calculator App</h3>
+                    <p>A clean, responsive mathematical calculator application built with precision arithmetic and keypress event handling.</p>
+                    <div class="project-tags">
+                        <span>JavaScript</span>
+                        <span>CSS Grid</span>
+                        <span>DOM Manipulation</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="./projects/calculator/index.html" target="_blank" class="btn-link">View Project &rarr;</a>
+                    </div>
+                </article>
+
+                <!-- Project 2: E-Commerce -->
+                <article class="project-card glassmorphism">
+                    <div class="project-badge glass-subheading">Featured Web App</div>
+                    <h3 class="glass-subheading">E-Commerce Platform</h3>
+                    <p>A full-featured digital shopping storefront featuring product listings, interactive cart workflows, and responsive checkout UI.</p>
+                    <div class="project-tags">
+                        <span>HTML5</span>
+                        <span>CSS3</span>
+                        <span>JavaScript</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="./projects/e commerce/index.html" target="_blank" class="btn-link">View Storefront &rarr;</a>
+                    </div>
+                </article>
+
+                <!-- Project 3: Netflix Clone -->
+                <article class="project-card glassmorphism">
+                    <div class="project-badge glass-subheading">UI Replica</div>
+                    <h3 class="glass-subheading">Netflix UI Clone</h3>
+                    <p>A high-fidelity front-end clone of the Netflix streaming platform UI, built with fluid horizontal carousels and sleek backdrop effects.</p>
+                    <div class="project-tags">
+                        <span>CSS Flexbox</span>
+                        <span>Responsive UI</span>
+                        <span>Media Queries</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="./projects/netflix clone/index.html" target="_blank" class="btn-link">View Live Demo &rarr;</a>
+                    </div>
+                </article>
+
+                <!-- Project 4: Todo List App -->
+                <article class="project-card glassmorphism">
+                    <div class="project-badge glass-subheading">Productivity Tool</div>
+                    <h3 class="glass-subheading">To-Do List App</h3>
+                    <p>An interactive task management application supporting task addition, deletion, persistent state management, and item filtering.</p>
+                    <div class="project-tags">
+                        <span>JavaScript</span>
+                        <span>Local Storage</span>
+                        <span>Dynamic Rendering</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="./projects/todo-list-app/index.html" target="_blank" class="btn-link">Launch App &rarr;</a>
+                    </div>
+                </article>
+
+                <!-- Project 5: Custom Website -->
+                <article class="project-card glassmorphism">
+                    <div class="project-badge glass-subheading">Client Project</div>
+                    <h3 class="glass-subheading">Modern Website Layout</h3>
+                    <p>A fully customized website experience designed for responsive modern web browsers with tailored UI design language.</p>
+                    <div class="project-tags">
+                        <span>Web Design</span>
+                        <span>HTML / CSS</span>
+                        <span>JS Interactions</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="./projects/website/index.html" target="_blank" class="btn-link">View Website &rarr;</a>
+                    </div>
+                </article>
+
+                <!-- Project 6: Dashboard project -->
+                <article class="project-card glassmorphism">
+                    <div class="project-badge glass-subheading">Admin Dashboard</div>
+                    <h3 class="glass-subheading">Interactive Dashboard</h3>
+                    <p>A sleek, interactive admin dashboard interface with dynamic charts, responsive layout, and real-time data visualization.</p>
+                    <div class="project-tags">
+                        <span>React.js</span>
+                        <span>Chart.js</span>
+                        <span>Responsive Design</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="./projects/dashboard/index.html" target="_blank" class="btn-link">View Dashboard &rarr;</a>
+                    </div>
+                </article>
+
+                <!-- Project 7: My Card Project -->
+                <article class="project-card glassmorphism">
+                    <div class="project-badge glass-subheading">Personal Card</div>
+                    <h3 class="glass-subheading">My Digital Business Card</h3>
+                    <p>Personal digital business card / contact card component.</p>
+                    <div class="project-links">
+                        <a href="./projects/my card/index.html" target="_blank" class="btn-link">View Card &rarr;</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Skills Section -->
+    <section class="section section-reveal" id="skills">
+        <div class="container">
+            <div class="section-heading">
+                <span class="section-tag glass-subheading">// CAPABILITIES</span>
+                <h2>Technical Stack</h2>
+            </div>
+
+            <div class="skills-flex">
+                <div class="skill-chip glass-subheading">HTML5 / Semantic Markup</div>
+                <div class="skill-chip glass-subheading">CSS3 / Flexbox &amp; Grid</div>
+                <div class="skill-chip glass-subheading">JavaScript (ES6+)</div>
+                <div class="skill-chip glass-subheading">React.js Ecosystem</div>
+                <div class="skill-chip glass-subheading">Responsive Web Design</div>
+                <div class="skill-chip glass-subheading">Git &amp; Version Control</div>
+                <div class="skill-chip glass-subheading">Vite / Build Tools</div>
+                <div class="skill-chip glass-subheading">UI Animations &amp; Canvas</div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Contact Section -->
+    <section class="section section-reveal" id="contact">
+        <div class="container">
+            <div class="contact-box glassmorphism">
+                <span class="section-tag glass-subheading">// CONNECT</span>
+                <h2>Let's Build Something Exceptional</h2>
+                <p>Feel free to reach out for project inquiries, freelance work, or development opportunities.</p>
+
+                <!-- Quick Action Contact Buttons -->
+                <div class="contact-buttons">
+                    <a href="mailto:duryabmurtaza578@gmail.com" class="contact-card-btn">
+                        <span class="glass-subheading">Email</span>
+                        <strong>duryabmurtaza578@gmail.com</strong>
+                    </a>
+                    <a href="tel:+923008798578" class="contact-card-btn">
+                        <span class="glass-subheading">Phone</span>
+                        <strong>+92 300 8798578</strong>
+                    </a>
+                    <a href="https://maps.google.com/?q=Lahore,Pakistan" target="_blank" class="contact-card-btn">
+                        <span class="glass-subheading">Location</span>
+                        <strong>Lahore, Pakistan 📍</strong>
+                    </a>
+                </div>
+
+                <!-- Message Me Form -->
+                <div class="contact-form-wrapper">
+                    <h3 class="form-title glass-subheading">Send a Direct Message</h3>
+                    <form action="mailto:duryabmurtaza578@gmail.com" method="post" enctype="text/plain" class="contact-form">
+                        <div class="form-group-row">
+                            <input type="text" name="Name" placeholder="Your Name" required class="form-input">
+                            <input type="email" name="Email" placeholder="Your Email" required class="form-input">
+                        </div>
+                        <input type="text" name="Subject" placeholder="Subject" required class="form-input">
+                        <textarea name="Message" rows="5" placeholder="Write your message here..." required class="form-input form-textarea"></textarea>
+                        <button type="submit" class="btn btn-primary form-submit-btn">Send Message 🚀</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>&copy; <span id="year"></span> Duryab Shah. All rights reserved.</p>
+            <p class="footer-status glass-subheading">System Online &bull; Active</p>
+        </div>
+    </footer>
+
+    <!-- Include Font Awesome Icons in your <head> section -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Button Container -->
+<div class="social-buttons">
+  <a href="https://github.com/duryabmurtaza578-max" target="_blank" rel="noopener noreferrer" class="btn github">
+    <i class="fab fa-github"></i> GitHub
+  </a>
+  <a href="https://www.linkedin.com/in/duryab-murtaza-76b739404/" target="_blank" rel="noopener noreferrer" class="btn linkedin">
+    <i class="fab fa-linkedin"></i> LinkedIn
+  </a>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

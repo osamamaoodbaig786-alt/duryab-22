@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netflix Clone - Watch TV Shows & Movies</title>
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-left">
+      <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix Logo">
+      <ul class="nav-links">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">TV Shows</a></li>
+        <li><a href="#">Movies</a></li>
+        <li><a href="#">New & Popular</a></li>
+        <li><a href="#">My List</a></li>
+      </ul>
+    </div>
+    <div class="nav-right">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" placeholder="Titles, people, genres..." id="searchInput">
+      </div>
+      <i class="fa-solid fa-bell nav-icon"></i>
+      <div class="user-profile">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="User Profile">
+        <i class="fa-solid fa-caret-down"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero / Billboard Section -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-badge"><i class="fa-solid fa-fire"></i> #1 in Movies Today</span>
+      <h1 class="hero-title">STRANGER THINGS</h1>
+      <p class="hero-description">
+        When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces and one strange little girl.
+      </p>
+      <div class="hero-buttons">
+        <button class="btn btn-play" id="openTrailerBtn">
+          <i class="fa-solid fa-play"></i> Play
+        </button>
+        <button class="btn btn-info" id="moreInfoBtn">
+          <i class="fa-solid fa-circle-info"></i> More Info
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Rows Section -->
+  <main class="main-container">
+
+    <!-- Trending Now Row -->
+    <section class="row">
+      <h2 class="row-title">Trending Now</h2>
+      <div class="row-wrapper">
+        <button class="handle left-handle" onclick="scrollRow(this, -1)"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="row-posters">
+          <div class="poster-card" data-title="Stranger Things" data-video="https://www.youtube.com/embed/b9EkMc79ZSU">
+            <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80" alt="Movie">
+            <div class="card-overlay"><span class="play-icon"><i class="fa-solid fa-circle-play"></i></span><p>Stranger Things</p></div>
+          </div>
+          <div class="poster-card" data-title="Cyberpunk: Edgerunners" data-video="https://www.youtube.com/embed/JtqIas3bYhg">
+            <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80" alt="Movie">
+            <div class="card-overlay"><span class="play-icon"><i class="fa-solid fa-circle-play"></i></span><p>Cyberpunk</p></div>
+          </div>
+          <div class="poster-card" data-title="The Dark Knight" data-video="https://www.youtube.com/embed/EXeTwQWrcwY">
+            <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80" alt="Movie">
+            <div class="card-overlay"><span class="play-icon"><i class="fa-solid fa-circle-play"></i></span><p>Dark Knight</p></div>
+          </div>
+          <div class="poster-card" data-title="Interstellar" data-video="https://www.youtube.com/embed/zSWdZVtXT7E">
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" alt="Movie">
+            <div class="card-overlay"><span class="play-icon"><i class="fa-solid fa-circle-play"></i></span><p>Interstellar</p></div>
+          </div>
+          <div class="poster-card" data-title="Inception" data-video="https://www.youtube.com/embed/YoHD9XEInc0">
+            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80" alt="Movie">
+            <div class="card-overlay"><span class="play-icon"><i class="fa-solid fa-circle-play"></i></span><p>Inception</p></div>
+          </div>
+          <div class="poster-card" data-title="The Matrix" data-video="https://www.youtube.com/embed/vKQi3bBA1y8">
+            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80" alt="Movie">
+            <div class="card-overlay"><span class="play-icon"><i class="fa-solid fa-circle-play"></i></span><p>The Matrix</p></div>
+          </div>
+        </div>
+        <button class="handle right-handle" onclick="scrollRow(this, 1)"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </section>
+
+    <!-- Popular Action Movies Row -->
+    <section class="row">
+      <h2 class="row-title">Popular Action & Sci-Fi</h2>
+      <div class="row-wrapper">
+        <button class="handle left-handle" onclick="scrollRow(this, -1)"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="row-posters">
+          <div class="poster-card" data-title="Blade Runner 2049" data-video="https://www.youtube.com/embed/gCcx85zbxz4">
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80" alt="Movie">
+            <div class="card-overlay"><span class="play-icon"><i class="fa-solid fa-circle-play"></i></span><p>Blade Runner</p></div>
+          </div>
+          <div class="poster-card" data-title="Neon Odyssey" data-video="https://www.youtube.com/embed/b9EkMc79ZSU">
+            <img src="https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=600&q=80" alt="Movie">
+            <div class="card-overlay"><span class="play-icon"><i class="fa-solid fa-circle-play"></i></span><p>Neon Odyssey</p></div>
+          </div>
+          <div class="poster-card" data-title="Space Exploration" data-video="https://www.youtube.com/embed/zSWdZVtXT7E">
+            <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=600&q=80" alt="Movie">
+            <div class="card-overlay"><span class="play-icon"><i class="fa-solid fa-circle-play"></i></span><p>Space Odyssey</p></div>
+          </div>
+          <div class="poster-card" data-title="Sub-Zero" data-video="https://www.youtube.com/embed/EXeTwQWrcwY">
+            <img src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?auto=format&fit=crop&w=600&q=80" alt="Movie">
+            <div class="card-overlay"><span class="play-icon"><i class="fa-solid fa-circle-play"></i></span><p>Arctic Hunt</p></div>
+          </div>
+          <div class="poster-card" data-title="Speed Highway" data-video="https://www.youtube.com/embed/YoHD9XEInc0">
+            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80" alt="Movie">
+            <div class="card-overlay"><span class="play-icon"><i class="fa-solid fa-circle-play"></i></span><p>Velocita</p></div>
+          </div>
+        </div>
+        <button class="handle right-handle" onclick="scrollRow(this, 1)"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-accordion">
+        <div class="faq-item">
+          <button class="faq-question">What is Netflix? <i class="fa-solid fa-plus"></i></button>
+          <div class="faq-answer">
+            <p>Netflix is a streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-connected devices.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">How much does Netflix cost? <i class="fa-solid fa-plus"></i></button>
+          <div class="faq-answer">
+            <p>Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed monthly fee. Plans range from basic to premium.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Where can I watch? <i class="fa-solid fa-plus"></i></button>
+          <div class="faq-answer">
+            <p>Watch anywhere, anytime. Sign in with your Netflix account to watch instantly on the web at netflix.com from your personal computer or on any device.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Trailer Video Modal -->
+  <div class="modal" id="videoModal">
+    <div class="modal-content">
+      <button class="close-modal" id="closeModalBtn">&times;</button>
+      <div class="iframe-container">
+        <iframe id="trailerIframe" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-links">
+      <ul>
+        <li><a href="#">Audio Description</a></li>
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Gift Cards</a></li>
+        <li><a href="#">Media Center</a></li>
+        <li><a href="#">Investor Relations</a></li>
+        <li><a href="#">Jobs</a></li>
+        <li><a href="#">Terms of Use</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Legal Notices</a></li>
+        <li><a href="#">Cookie Preferences</a></li>
+      </ul>
+    </div>
+    <div class="footer-copyright">
+      <p>&copy; 2026 Netflix Clone, Inc. Built with HTML, CSS, and JS.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

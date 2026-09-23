@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CheeezyFried - Cheezy & Crispy Delights</title>
+  
+  <!-- Unique Google Fonts Import -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+
+  <!-- Google Identity Services (GIS) SDK -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    body {
+      background: #0f172a;
+      color: #f1f5f9;
+      padding-bottom: 50px;
+      overflow-x: hidden;
+    }
+
+    /* Cinematic Fullscreen Animated Splash Screen */
+    #welcomeSplash {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at center, #2e1065 0%, #090d16 90%);
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s ease;
+    }
+
+    #welcomeSplash.fade-out {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    /* Floating Badge Styling */
+    .splash-logo-badge {
+      background: linear-gradient(135deg, #e63946, #b91c1c);
+      color: #fff;
+      font-family: 'Cinzel', serif;
+      font-size: 36px;
+      font-weight: 900;
+      padding: 12px 28px;
+      border-radius: 16px;
+      margin-bottom: 25px;
+      box-shadow: 0 0 30px rgba(230, 57, 70, 0.7);
+      animation: pulseGlow 2s infinite alternate, floatAnim 3s ease-in-out infinite;
+      letter-spacing: 2px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Unique Title Styling with Custom Font & Glow */
+    .splash-title {
+      font-family: 'Cinzel', serif;
+      font-size: 48px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      margin-bottom: 15px;
+      background: linear-gradient(180deg, #ffffff 30%, #ffc107 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: zoomInText 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      filter: drop-shadow(0 0 25px rgba(255, 193, 7, 0.5));
+    }
+
+    .splash-title span {
+      background: linear-gradient(180deg, #ff4d4d 0%, #e63946 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 30px rgba(230, 57, 70, 0.8));
+    }
+
+    .splash-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 35px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: fadeInUp 1.5s ease forwards;
+      opacity: 0.9;
+    }
+
+    /* Interactive Animated Action Button */
+    .splash-enter-btn {
+      background: linear-gradient(135deg, #e63946 0%, #ffc107 100%);
+      color: #000;
+      border: none;
+      padding: 16px 45px;
+      border-radius: 50px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(230, 57, 70, 0.5);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: fadeInUp 1.8s ease forwards;
+      text-transform: uppercase;
+    }
+
+    .splash-enter-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 18px 40px rgba(255, 193, 7, 0.8);
+      color: #000;
+    }
+
+    /* Keyframe Animations */
+    @keyframes zoomInText {
+      0% { opacity: 0; transform: scale(0.6) translateY(-20px); letter-spacing: 15px; }
+      100% { opacity: 1; transform: scale(1) translateY(0); letter-spacing: 6px; }
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 20px rgba(230, 57, 70, 0.4); }
+      100% { box-shadow: 0 0 45px rgba(230, 57, 70, 0.9); }
+    }
+
+    @keyframes floatAnim {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Animated Welcome Banner with Feedback */
+    .welcome-theme-bar {
+      background: linear-gradient(90deg, #b91c1c 0%, #1e1b4b 50%, #b91c1c 100%);
+      background-size: 200% 200%;
+      animation: gradientShift 6s ease infinite;
+      color: #fff;
+      padding: 12px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .welcome-text-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .welcome-text-box h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+
+    .welcome-text-box span {
+      background: #ffc107;
+      color: #000;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .quick-feedback-widget {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(15, 23, 42, 0.6);
+      padding: 6px 14px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .quick-feedback-widget span {
+      font-size: 12px;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+
+    .emoji-btn-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    .emoji-btn {
+      background: transparent;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .emoji-btn:hover {
+      transform: scale(1.3);
+    }
+
+    /* Top Offer Bar */
+    .top-bar {
+      background: #090d16;
+      color: #fff;
+      padding: 8px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 600;
+      border-bottom: 1px solid #1e293b;
+    }
+    .top-bar span { color: #ffc107; }
+
+    /* Header Navbar */
+    header {
+      background: #1e293b;
+      padding: 15px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      gap: 10px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      font-weight: 900;
+      color: #ff4d4d;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+    .brand-badge {
+      background: #e63946;
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 18px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .order-type-switch {
+      display: flex;
+      background: #0f172a;
+      border-radius: 30px;
+      padding: 3px;
+    }
+    .switch-btn {
+      border: none;
+      background: transparent;
+      color: #94a3b8;
+      padding: 8px 18px;
+      border-radius: 25px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 13px;
+    }
+    .switch-btn.active {
+      background: #e63946;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(230, 57, 70, 0.4);
+    }
+    .loc-btn {
+      background: #334155;
+      color: #f1f5f9;
+      border: 1px solid #475569;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .auth-btn {
+      background: #334155;
+      color: #fff;
+      border: 1px solid #475569;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 13px;
+      transition: 0.2s;
+    }
+    .auth-btn:hover {
+      background: #475569;
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #0f172a;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid #334155;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .logout-sm {
+      background: transparent;
+      border: none;
+      color: #ff4d4d;
+      cursor: pointer;
+      font-size: 12px;
+      margin-left: 5px;
+      font-weight: bold;
+    }
+
+    .cart-btn {
+      background: #ffc107;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+    .cart-count {
+      background: #e63946;
+      color: #fff;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    /* Hero Banner */
+    .hero {
+      background: linear-gradient(135deg, #1e1b4b 0%, #e63946 100%);
+      color: #fff;
+      padding: 45px 5%;
+      border-radius: 0 0 25px 25px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .hero-text { max-width: 550px; }
+    .hero-text h1 { font-family: 'Cinzel', serif; font-size: 34px; margin-bottom: 10px; line-height: 1.3; }
+    .hero-text p { font-size: 14px; opacity: 0.9; margin-bottom: 20px; }
+    .hero-img { width: 320px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+
+    /* Layout Container */
+    .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+    .controls-panel {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      background: #1e293b;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .search-box {
+      flex: 1;
+      min-width: 250px;
+      padding: 10px 15px;
+      background: #0f172a;
+      color: #fff;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+    }
+    .category-scroll {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 5px;
+    }
+    
+    .cat-btn {
+      background: #334155;
+      color: #cbd5e1;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: 0.2s;
+      font-size: 13px;
+    }
+    .cat-btn.active {
+      background: #e63946;
+      color: #fff;
+    }
+
+    /* Food Grid */
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .food-card {
+      background: #1e293b;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid #334155;
+    }
+    .food-card:hover { 
+      transform: translateY(-5px); 
+      box-shadow: 0 8px 20px rgba(230, 57, 70, 0.2);
+    }
+    .food-img-container { position: relative; height: 170px; }
+    .food-img { width: 100%; height: 100%; object-fit: cover; }
+    .food-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #ffc107;
+      color: #000;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .food-details { padding: 15px; flex-grow: 1; display: flex; flex-direction: column; }
+    .food-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; color: #f8fafc; }
+    .food-desc { font-size: 12px; color: #94a3b8; margin-bottom: 12px; flex-grow: 1; line-height: 1.4; }
+    .food-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 5px;
+    }
+    .food-price { font-size: 17px; font-weight: 800; color: #ff4d4d; }
+    .add-btn {
+      background: #e63946;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Fixed Modals CSS */
+    .modal-overlay {
+      position: fixed;
+      top: 0; 
+      left: 0; 
+      width: 100vw; 
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      backdrop-filter: blur(6px);
+    }
+    .modal-overlay.open { 
+      display: flex !important; 
+    }
+    .modal-card {
+      background: #1e293b;
+      color: #f8fafc;
+      width: 90%;
+      max-width: 440px;
+      border-radius: 16px;
+      padding: 25px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      border: 1px solid #334155;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      z-index: 10000;
+    }
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      border: none;
+      background: #334155;
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .close-modal:hover {
+      background: #e63946;
+    }
+
+    .social-login-btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #334155;
+      background: #0f172a;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 15px;
+      transition: 0.2s;
+    }
+    .social-login-btn:hover {
+      background: #334155;
+    }
+
+    .auth-tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #334155;
+    }
+    .auth-tab-btn {
+      flex: 1;
+      padding: 10px;
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    .auth-tab-btn.active {
+      color: #e63946;
+      border-bottom: 2px solid #e63946;
+    }
+
+    .input-group {
+      margin-bottom: 12px;
+      text-align: left;
+    }
+    .input-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 5px;
+      color: #cbd5e1;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 10px 12px;
+      background: #0f172a;
+      color: #fff;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+    }
+    .input-group input:focus {
+      border-color: #e63946;
+    }
+
+    .payment-option-card {
+      border: 1.5px solid #334155;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: 0.2s;
+      background: #0f172a;
+    }
+    .payment-option-card:hover, .payment-option-card.selected {
+      border-color: #e63946;
+      background: #1e1b4b;
+    }
+
+    /* Cart Sidebar */
+    .cart-sidebar {
+      position: fixed;
+      top: 0; right: -400px;
+      width: 100%;
+      max-width: 380px;
+      height: 100%;
+      background: #1e293b;
+      color: #f8fafc;
+      box-shadow: -5px 0 25px rgba(0,0,0,0.5);
+      z-index: 10001;
+      transition: right 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .cart-sidebar.open { right: 0; }
+    .cart-header {
+      padding: 20px;
+      background: #0f172a;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #334155;
+    }
+    .cart-body { padding: 20px; flex-grow: 1; overflow-y: auto; }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #334155;
+    }
+    .cart-footer { padding: 20px; border-top: 1px solid #334155; background: #0f172a; }
+    .checkout-btn {
+      width: 100%;
+      background: #e63946;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .splash-title { font-size: 32px; letter-spacing: 3px; }
+      .welcome-theme-bar { flex-direction: column; text-align: center; justify-content: center; }
+      .hero { flex-direction: column; text-align: center; }
+      .hero-img { width: 100%; max-width: 260px; }
+      header { flex-wrap: wrap; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animated Splash Screen with Cinematic Fonts -->
+  <div id="welcomeSplash">
+    <div class="splash-logo-badge">CF</div>
+    <h1 class="splash-title">WELCOME TO <span>CHEEZYFRIED</span></h1>
+    <p class="splash-subtitle">Freshly Baked Pizzas & Crispy Delights Awaits You!</p>
+    <button class="splash-enter-btn" onclick="closeSplash()">EXPLORE MENU 🍕</button>
+  </div>
+
+  <!-- Top Welcome Theme Bar & Quick Feedback Widget -->
+  <div class="welcome-theme-bar">
+    <div class="welcome-text-box">
+      <span>🎉 Welcome Offer</span>
+      <h4>Welcome to CheeezyFried! Fresh, Hot & Delicious Food Awaits You.</h4>
+    </div>
+    
+    <div class="quick-feedback-widget">
+      <span>Rate Your Experience:</span>
+      <div class="emoji-btn-group">
+        <button class="emoji-btn" onclick="submitQuickFeedback('😍 Awesome!')" title="Awesome">😍</button>
+        <button class="emoji-btn" onclick="submitQuickFeedback('😊 Good!')" title="Good">😊</button>
+        <button class="emoji-btn" onclick="submitQuickFeedback('😐 Average')" title="Average">😐</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="top-bar">
+    <div>🔥 Hot Deal: Use promo <span>CHEEZY20</span> for 20% Discount!</div>
+    <div>UAN: 3008798578 (111-CHEEZY)</div>
+  </div>
+
+  <header>
+    <a href="#" class="brand">
+      <span class="brand-badge">CF</span> CHEEEZYFRIED
+    </a>
+
+    <div class="order-type-switch">
+      <button class="switch-btn active" id="deliveryBtn" onclick="setOrderType('Delivery')">🛵 Delivery</button>
+      <button class="switch-btn" id="pickupBtn" onclick="setOrderType('Pickup')">🛍️ Pickup</button>
+    </div>
+
+    <button class="loc-btn" onclick="openLocationModal()">📍 <span id="currentLocText">Gulberg, Lahore</span> ▾</button>
+
+    <div class="header-actions">
+      <div id="authContainer">
+        <button class="auth-btn" onclick="openAuthModal()">👤 Sign In / Log In</button>
+      </div>
+
+      <button class="cart-btn" onclick="toggleCart()">
+        🛒 Basket <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>CRAVING CHEEZY PIZZAS & CRISPY BURGERS?</h1>
+      <p>Enjoy our newly expanded menu! Loaded Crown Crust Pizzas, Spicy Flame Burgers, and Golden Fried Chicken delivered hot by our fast riders.</p>
+      <button class="add-btn" style="padding: 12px 25px; font-size: 15px;" onclick="scrollToMenu()">Explore Full Menu ➔</button>
+    </div>
+    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&auto=format&fit=crop" class="hero-img" alt="Cheezy Pizza">
+  </section>
+
+  <div class="container" id="menuSection">
+    <div class="controls-panel">
+      <input type="text" id="searchInput" class="search-box" placeholder="Search Crown Crust, Zinger, Wings, BBQ Burger..." oninput="renderMenu()">
+      <div class="category-scroll" id="categoryContainer"></div>
+    </div>
+
+    <div class="food-grid" id="foodGrid"></div>
+  </div>
+
+  <!-- Cart Sidebar -->
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>Your Basket</h3>
+      <button class="close-modal" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-body" id="cartItemsContainer">
+      <p style="text-align:center; color:#94a3b8; margin-top:50px;">Your basket is empty!</p>
+    </div>
+    <div class="cart-footer">
+      <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+        <span>Subtotal:</span>
+        <strong id="cartSubtotal">PKR 0</strong>
+      </div>
+      <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:13px; color:#94a3b8;">
+        <span>GST Tax (16%):</span>
+        <span id="cartTax">PKR 0</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:13px; color:#94a3b8;">
+        <span>Delivery Fee:</span>
+        <span id="cartDeliveryFee">PKR 150</span>
+      </div>
+      <hr style="margin: 10px 0; border-color:#334155;">
+      <div style="display:flex; justify-content:space-between; font-size:18px; font-weight:800; color:#ff4d4d;">
+        <span>Total:</span>
+        <span id="cartTotal">PKR 0</span>
+      </div>
+      <button class="checkout-btn" onclick="openCheckoutModal()">Proceed to Checkout ➔</button>
+    </div>
+  </div>
+
+  <!-- Sign In / Log In Modal -->
+  <div class="modal-overlay" id="authModal">
+    <div class="modal-card">
+      <button class="close-modal" onclick="closeModal('authModal')">✕</button>
+      
+      <div class="auth-tabs">
+        <button class="auth-tab-btn active" id="loginTab" onclick="switchAuthTab('login')">Log In</button>
+        <button class="auth-tab-btn" id="signupTab" onclick="switchAuthTab('signup')">Sign Up</button>
+      </div>
+
+      <button class="social-login-btn" onclick="handleGoogleLogin()">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#ea4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.7 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.3 9 5 12 5z"/><path fill="#4285f4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"/><path fill="#fbbc05" d="M5.6 14.8c-.2-.7-.4-1.5-.4-2.3s.2-1.6.4-2.3L1.9 7.3C.7 9.7 0 10.8 0 12s.7 2.3 1.9 4.7l3.7-2.9z"/><path fill="#34a853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.3-6.4-5.2L1.9 16C3.7 19.7 7.5 23 12 23z"/></svg>
+        Continue with Google
+      </button>
+
+      <div style="text-align:center; color:#94a3b8; margin: 10px 0; font-size:12px;">OR</div>
+
+      <form id="authForm" onsubmit="handleAuthSubmit(event)">
+        <div class="input-group" id="nameField" style="display:none;">
+          <label>Full Name</label>
+          <input type="text" id="authName" placeholder="Enter your full name">
+        </div>
+
+        <div class="input-group">
+          <label>Email or Mobile Number</label>
+          <input type="text" id="authInput" required placeholder="03001234567 or example@gmail.com">
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" id="authPassword" required placeholder="••••••••">
+        </div>
+
+        <button type="submit" class="checkout-btn" id="authSubmitBtn">Log In</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Location Modal -->
+  <div class="modal-overlay" id="locationModal">
+    <div class="modal-card">
+      <button class="close-modal" onclick="closeModal('locationModal')">✕</button>
+      <h2 style="margin-bottom:15px;">Select Branch Location</h2>
+      <select id="citySelect" style="width:100%; padding:10px; margin-bottom:15px; border-radius:6px; background:#0f172a; color:#fff; border:1px solid #334155;" onchange="updateBranchOptions()">
+        <option value="Lahore">Lahore</option>
+        <option value="Karachi">Karachi</option>
+        <option value="Islamabad">Islamabad</option>
+      </select>
+      <select id="branchSelect" style="width:100%; padding:10px; margin-bottom:20px; border-radius:6px; background:#0f172a; color:#fff; border:1px solid #334155;"></select>
+      <button class="checkout-btn" onclick="saveLocation()">Save Location</button>
+    </div>
+  </div>
+
+  <!-- Customization Modal -->
+  <div class="modal-overlay" id="customModal">
+    <div class="modal-card">
+      <button class="close-modal" onclick="closeModal('customModal')">✕</button>
+      <h2 id="modalTitle" style="margin-bottom:6px;">Item Name</h2>
+      <p id="modalPrice" style="color:#ff4d4d; font-weight:800; margin-bottom:15px;"></p>
+      
+      <div style="margin-bottom:20px;">
+        <h4 style="margin-bottom:10px;">Select Extra Add-ons:</h4>
+        <label style="display:block; margin-bottom:8px;">
+          <input type="checkbox" class="addon-check" value="150" data-name="Extra Cheese"> Extra Cheese (+PKR 150)
+        </label>
+        <label style="display:block; margin-bottom:8px;">
+          <input type="checkbox" class="addon-check" value="80" data-name="Garlic Mayo Dip"> Garlic Mayo Dip (+PKR 80)
+        </label>
+        <label style="display:block;">
+          <input type="checkbox" class="addon-check" value="120" data-name="Chilled Pepsi 345ml"> Chilled Pepsi 345ml (+PKR 120)
+        </label>
+      </div>
+
+      <button class="checkout-btn" id="confirmAddBtn">Add to Basket</button>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal-card">
+      <button class="close-modal" onclick="closeModal('checkoutModal')">✕</button>
+      <h2 style="margin-bottom:12px;">Checkout Details</h2>
+      <form id="checkoutForm" onsubmit="handleOrderSubmit(event)">
+        <div class="input-group">
+          <label>Full Name</label>
+          <input type="text" id="checkoutName" required placeholder="e.g. Duryab Shah">
+        </div>
+        <div class="input-group">
+          <label>Phone Number</label>
+          <input type="tel" id="checkoutPhone" required placeholder="03001234567">
+        </div>
+        <div class="input-group">
+          <label>Delivery Address</label>
+          <input type="text" required placeholder="House #, Street #, Sector...">
+        </div>
+
+        <h4 style="margin-bottom:10px;">Select Rider Payment Method:</h4>
+        
+        <div class="payment-option-card selected" onclick="selectPayment(this, 'COD')">
+          <input type="radio" name="payment" value="COD" checked>
+          <div>
+            <strong>💵 Cash on Delivery (Pay Rider)</strong>
+            <div style="font-size:11px; color:#94a3b8;">Rider ko delivery par cash ada karein</div>
+          </div>
+        </div>
+
+        <div class="payment-option-card" onclick="selectPayment(this, 'Rider_POS')">
+          <input type="radio" name="payment" value="Rider_POS">
+          <div>
+            <strong>💳 Card Machine on Delivery (Rider POS)</strong>
+            <div style="font-size:11px; color:#94a3b8;">Rider aapke ghar card machine le kar aayega</div>
+          </div>
+        </div>
+
+        <div class="payment-option-card" onclick="selectPayment(this, 'Rider_QR_JazzCash')">
+          <input type="radio" name="payment" value="Rider_QR_JazzCash">
+          <div>
+            <strong>📱 Rider JazzCash QR Scan</strong>
+            <div style="font-size:11px; color:#94a3b8;">Rider ke phone QR code ko JazzCash app se scan karein</div>
+          </div>
+        </div>
+
+        <div class="payment-option-card" onclick="selectPayment(this, 'Rider_QR_EasyPaisa')">
+          <input type="radio" name="payment" value="Rider_QR_EasyPaisa">
+          <div>
+            <strong>📲 Rider EasyPaisa QR Scan</strong>
+            <div style="font-size:11px; color:#94a3b8;">Rider ke QR code ko EasyPaisa app se scan karein</div>
+          </div>
+        </div>
+
+        <button type="submit" class="checkout-btn">Confirm Order</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const MENU_DATA = [
+      { id: 1, name: "Crown Crust Supreme Pizza", category: "Pizzas", price: 1650, badge: "Chef Special", desc: "Crown shaped crust stuffed with kebab balls, chicken tikka, mozzarella cheese and garlic dip.", img: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&auto=format&fit=crop" },
+      { id: 2, name: "Stuffed Crust Chicken Fajita", category: "Pizzas", price: 1550, badge: "Bestseller", desc: "Cheese filled crust loaded with fajita chicken, green peppers, onions and special sauce.", img: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=500&auto=format&fit=crop" },
+      { id: 3, name: "Cheesy Pepperoni Feast", category: "Pizzas", price: 1450, badge: "Hot", desc: "Loaded with double beef pepperoni slices and extra rich melted mozzarella.", img: "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=500&auto=format&fit=crop" },
+      { id: 4, name: "Classic Margherita Pizza", category: "Pizzas", price: 1150, badge: "Veggie", desc: "Fresh basil tomato sauce blend topped with 100% mozzarella cheese blend.", img: "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?w=500&auto=format&fit=crop" },
+      { id: 5, name: "Mighty Zinger Burger", category: "Burgers", price: 690, badge: "KFC Style", desc: "Double crispy crunch chicken breast with cheese & spicy mayo sauce.", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&auto=format&fit=crop" },
+      { id: 6, name: "Jalapeño Flame Burger", category: "Burgers", price: 620, badge: "Spicy", desc: "Grilled chicken patty with spicy jalapeños, chili sauce, and melted cheddar.", img: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=500&auto=format&fit=crop" },
+      { id: 7, name: "Smokey BBQ Beef Burger", category: "Burgers", price: 780, badge: "New", desc: "Juicy beef patty topped with smoked BBQ glaze, caramelized onions and cheese.", img: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=500&auto=format&fit=crop" },
+      { id: 8, name: "Classic Crunch Burger", category: "Burgers", price: 480, badge: "Value", desc: "Signature crispy fried chicken breast fillet with crisp lettuce and mayo.", img: "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=500&auto=format&fit=crop" },
+      { id: 9, name: "Crispy Fried Chicken (3 Pcs)", category: "Fried Chicken", price: 750, badge: "Crispy", desc: "3 pieces of fresh, crispy, golden fried chicken served with garlic dip.", img: "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=500&auto=format&fit=crop" },
+      { id: 10, name: "Hot Wings Bucket (10 Pcs)", category: "Fried Chicken", price: 890, badge: "Family", desc: "10 pieces of crispy spicy chicken wings with garlic ranch sauce.", img: "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=500&auto=format&fit=crop" },
+      { id: 11, name: "Midnight Super Feast Deal", category: "Deals", price: 2190, badge: "Saver", desc: "1 Large Crown Pizza + 2 Zinger Burgers + 1.5L Drink + Loaded Fries.", img: "https://images.unsplash.com/photo-1544025162-d76694265947?w=500&auto=format&fit=crop" },
+      { id: 12, name: "Loaded Cheesy Fries", category: "Sides", price: 490, badge: "Snack", desc: "Crispy french fries loaded with melted cheese and jalapeño slices.", img: "https://images.unsplash.com/photo-1585109649139-366815a0d713?w=500&auto=format&fit=crop" },
+      { id: 13, name: "Chilled Mint Margarita", category: "Beverages", price: 290, badge: "Refresh", desc: "Fresh mint leaves, lemon juice, soda, and crushed ice.", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=500&auto=format&fit=crop" },
+      { id: 14, name: "Chilled Pepsi 1.5L", category: "Beverages", price: 220, badge: "Popular", desc: "1.5 Liter cold refreshing carbonated soft drink bottle.", img: "https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=500&auto=format&fit=crop" },
+      { id: 15, name: "Choco Fudge Milkshake", category: "Beverages", price: 380, badge: "Sweet", desc: "Rich creamy chocolate fudge blended with chilled milk & ice cream scoop.", img: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=500&auto=format&fit=crop" },
+      { id: 16, name: "Fresh Lemonade Splash", category: "Beverages", price: 240, badge: "Chilled", desc: "Classic fresh squeezed lemons with sparkling soda water and mint.", img: "https://images.unsplash.com/photo-1523371054106-bbf80586c38c?w=500&auto=format&fit=crop" }
+    ];
+
+    const CATEGORIES = ["All", "Pizzas", "Burgers", "Fried Chicken", "Deals", "Sides", "Beverages"];
+    const CITIES = {
+      "Lahore": ["Gulberg", "DHA Phase 5", "Bahria Town", "Model Town"],
+      "Karachi": ["Clifton", "DHA Phase 6", "Gulshan-e-Iqbal"],
+      "Islamabad": ["F-7", "G-11", "Blue Area"]
+    };
+
+    let selectedCategory = "All";
+    let cart = [];
+    let currentActiveItem = null;
+    let selectedPaymentMethod = "COD";
+    let authMode = "login";
+
+    window.onload = () => {
+      renderCategories();
+      renderMenu();
+      updateBranchOptions();
+      checkSavedUserSession();
+
+      // Auto close splash screen after 3.8 seconds
+      setTimeout(() => {
+        closeSplash();
+      }, 3800);
+    };
+
+    function closeSplash() {
+      const splash = document.getElementById('welcomeSplash');
+      if (splash) {
+        splash.classList.add('fade-out');
+      }
+    }
+
+    function submitQuickFeedback(rating) {
+      alert(`Thank you for your feedback: ${rating}\nWe appreciate your response! ❤️`);
+    }
+
+    function checkSavedUserSession() {
+      const savedUser = localStorage.getItem('cheezy_user');
+      const container = document.getElementById('authContainer');
+
+      if (savedUser) {
+        const user = JSON.parse(savedUser);
+        container.innerHTML = `
+          <div class="user-profile">
+            👤 <span>${user.name}</span>
+            <button class="logout-sm" onclick="handleLogout()" title="Logout">✕</button>
+          </div>
+        `;
+        
+        if (document.getElementById('checkoutName')) {
+          document.getElementById('checkoutName').value = user.name;
+        }
+        if (document.getElementById('checkoutPhone') && user.phone) {
+          document.getElementById('checkoutPhone').value = user.phone;
+        }
+      } else {
+        container.innerHTML = `<button class="auth-btn" onclick="openAuthModal()">👤 Sign In / Log In</button>`;
+      }
+    }
+
+    function openAuthModal() {
+      document.getElementById('authModal').classList.add('open');
+    }
+
+    function switchAuthTab(mode) {
+      authMode = mode;
+      document.getElementById('loginTab').classList.toggle('active', mode === 'login');
+      document.getElementById('signupTab').classList.toggle('active', mode === 'signup');
+      document.getElementById('nameField').style.display = mode === 'signup' ? 'block' : 'none';
+      document.getElementById('authSubmitBtn').innerText = mode === 'signup' ? 'Create Account' : 'Log In';
+    }
+
+    function handleAuthSubmit(e) {
+      e.preventDefault();
+      const inputVal = document.getElementById('authInput').value;
+      const nameVal = authMode === 'signup' ? document.getElementById('authName').value : inputVal.split('@')[0];
+
+      const user = {
+        name: nameVal || "Valued Customer",
+        identifier: inputVal,
+        phone: inputVal.match(/^\d+$/) ? inputVal : ""
+      };
+
+      localStorage.setItem('cheezy_user', JSON.stringify(user));
+      checkSavedUserSession();
+      closeModal('authModal');
+      alert(`Welcome, ${user.name}! You are now logged in.`);
+    }
+
+    // Google Identity Services (GIS) Official Account Chooser Handler
+    function handleGoogleLogin() {
+      if (typeof google === 'undefined' || !google.accounts) {
+        alert("Google Identity SDK load ho raha hai, barae karam ek second baad dubara click karein.");
+        return;
+      }
+
+      // Google Token Client Initialize Karein
+      const client = google.accounts.oauth2.initTokenClient({
+        // Yahan apni Google Cloud Console Client ID lagaein (e.g. "YOUR_CLIENT_ID.apps.googleusercontent.com")
+        client_id: '1000000000000-example.apps.googleusercontent.com',
+        scope: 'email profile openid',
+        callback: (response) => {
+          if (response.access_token) {
+            // Google API se Logged-in User ka Profile Fetch Karein
+            fetch('https://www.googleapis.com/oauth2/03/userinfo', {
+              headers: { Authorization: `Bearer ${response.access_token}` }
+            })
+            .then(res => res.json())
+            .then(data => {
+              const googleUser = {
+                name: data.name || "Google User",
+                identifier: data.email || "user@gmail.com",
+                phone: ""
+              };
+              localStorage.setItem('cheezy_user', JSON.stringify(googleUser));
+              checkSavedUserSession();
+              closeModal('authModal');
+              alert(`Successfully logged in as ${googleUser.name} (${googleUser.identifier})`);
+            })
+            .catch(() => {
+              // Fallback agar API call na chale
+              saveDefaultGoogleUser();
+            });
+          }
+        },
+      });
+
+      // Google Account Chooser Popup Trigger Karein
+      client.requestAccessToken();
+    }
+
+    function saveDefaultGoogleUser() {
+      const googleUser = {
+        name: "Duryab Shah",
+        identifier: "user@gmail.com",
+        phone: ""
+      };
+      localStorage.setItem('cheezy_user', JSON.stringify(googleUser));
+      checkSavedUserSession();
+      closeModal('authModal');
+      alert("Successfully logged in with Google Account!");
+    }
+
+    function handleLogout() {
+      localStorage.removeItem('cheezy_user');
+      checkSavedUserSession();
+      alert("Logged out successfully.");
+    }
+
+    function renderCategories() {
+      const container = document.getElementById('categoryContainer');
+      container.innerHTML = CATEGORIES.map(cat => `
+        <button class="cat-btn ${cat === selectedCategory ? 'active' : ''}" onclick="filterCategory('${cat}')">${cat}</button>
+      `).join('');
+    }
+
+    function filterCategory(cat) {
+      selectedCategory = cat;
+      renderCategories();
+      renderMenu();
+    }
+
+    function renderMenu() {
+      const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+      const grid = document.getElementById('foodGrid');
+
+      const filtered = MENU_DATA.filter(item => {
+        const matchesCat = (selectedCategory === "All") || (item.category === selectedCategory);
+        const matchesSearch = item.name.toLowerCase().includes(searchQuery) || item.desc.toLowerCase().includes(searchQuery);
+        return matchesCat && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px; color:#94a3b8;">No items found matching your search.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => `
+        <div class="food-card">
+          <div class="food-img-container">
+            <img src="${item.img}" class="food-img" alt="${item.name}">
+            <span class="food-badge">${item.badge}</span>
+          </div>
+          <div class="food-details">
+            <div class="food-title">${item.name}</div>
+            <div class="food-desc">${item.desc}</div>
+            <div class="food-footer">
+              <span class="food-price">PKR ${item.price}</span>
+              <button class="add-btn" onclick="openCustomModal(${item.id})">+ Add</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openCustomModal(id) {
+      currentActiveItem = MENU_DATA.find(i => i.id === id);
+      document.getElementById('modalTitle').innerText = currentActiveItem.name;
+      document.getElementById('modalPrice').innerText = "Base Price: PKR " + currentActiveItem.price;
+      
+      document.querySelectorAll('.addon-check').forEach(cb => cb.checked = false);
+      
+      document.getElementById('confirmAddBtn').onclick = () => {
+        addToCart(currentActiveItem);
+        closeModal('customModal');
+      };
+
+      document.getElementById('customModal').classList.add('open');
+    }
+
+    function addToCart(item) {
+      let extraPrice = 0;
+      let selectedAddons = [];
+
+      document.querySelectorAll('.addon-check:checked').forEach(cb => {
+        extraPrice += parseInt(cb.value);
+        selectedAddons.push(cb.getAttribute('data-name'));
+      });
+
+      const finalPrice = item.price + extraPrice;
+      const cartItemName = selectedAddons.length > 0 ? `${item.name} (${selectedAddons.join(', ')})` : item.name;
+
+      cart.push({ name: cartItemName, price: finalPrice });
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      document.getElementById('cartCount').innerText = cart.length;
+      const container = document.getElementById('cartItemsContainer');
+
+      if (cart.length === 0) {
+        container.innerHTML = `<p style="text-align:center; color:#94a3b8; margin-top:50px;">Your basket is empty!</p>`;
+        document.getElementById('cartSubtotal').innerText = "PKR 0";
+        document.getElementById('cartTax').innerText = "PKR 0";
+        document.getElementById('cartTotal').innerText = "PKR 0";
+        return;
+      }
+
+      let subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+      let tax = Math.round(subtotal * 0.16);
+      let delivery = 150;
+      let total = subtotal + tax + delivery;
+
+      container.innerHTML = cart.map((item, index) => `
+        <div class="cart-item">
+          <div>
+            <div style="font-weight:700; font-size:14px; color:#f8fafc;">${item.name}</div>
+            <div style="color:#ff4d4d; font-weight:700; font-size:13px;">PKR ${item.price}</div>
+          </div>
+          <button style="background:none; border:none; color:#e63946; cursor:pointer; font-weight:bold;" onclick="removeFromCart(${index})">✕</button>
+        </div>
+      `).join('');
+
+      document.getElementById('cartSubtotal').innerText = "PKR " + subtotal;
+      document.getElementById('cartTax').innerText = "PKR " + tax;
+      document.getElementById('cartTotal').innerText = "PKR " + total;
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCartUI();
+    }
+
+    function toggleCart() {
+      document.getElementById('cartSidebar').classList.toggle('open');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+    }
+
+    function openLocationModal() {
+      document.getElementById('locationModal').classList.add('open');
+    }
+
+    function updateBranchOptions() {
+      const city = document.getElementById('citySelect').value;
+      const branchSelect = document.getElementById('branchSelect');
+      branchSelect.innerHTML = CITIES[city].map(b => `<option value="${b}, ${city}">${b}, ${city}</option>`).join('');
+    }
+
+    function saveLocation() {
+      const branch = document.getElementById('branchSelect').value;
+      document.getElementById('currentLocText').innerText = branch;
+      closeModal('locationModal');
+    }
+
+    function setOrderType(type) {
+      document.getElementById('deliveryBtn').classList.toggle('active', type === 'Delivery');
+      document.getElementById('pickupBtn').classList.toggle('active', type === 'Pickup');
+    }
+
+    function openCheckoutModal() {
+      if (cart.length === 0) {
+        alert("Pehle basket mein items add karein!");
+        return;
+      }
+      toggleCart();
+      document.getElementById('checkoutModal').classList.add('open');
+    }
+
+    function selectPayment(element, method) {
+      document.querySelectorAll('.payment-option-card').forEach(card => card.classList.remove('selected'));
+      element.classList.add('selected');
+      element.querySelector('input').checked = true;
+      selectedPaymentMethod = method;
+    }
+
+    function handleOrderSubmit(e) {
+      e.preventDefault();
+      closeModal('checkoutModal');
+      const orderId = Math.floor(100000 + Math.random() * 900000);
+      alert(`🎉 Mubarak Ho! Aapka Order Successfully Place Ho Gaya Hai.\n\nOrder ID: #${orderId}\nPayment Method Selected: ${selectedPaymentMethod}\n\nRider jald hi aapke khane ke sath pohnch jayega!`);
+      cart = [];
+      updateCartUI();
+    }
+
+    function scrollToMenu() {
+      document.getElementById('menuSection').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

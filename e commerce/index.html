@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHAH's Company | Luxury & Lifestyle</title>
+    
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header>
+        <a href="#" class="brand-logo"><i class="fa-solid fa-crown"></i> SHAH'S <span>COMPANY</span></a>
+        <nav>
+            <ul>
+                <li><a href="#all" onclick="filterCategory('all')">Collections</a></li>
+                <li><a href="#perfumes" onclick="filterCategory('perfumes')">Perfumes</a></li>
+                <li><a href="#shirts" onclick="filterCategory('shirts')">Shirts</a></li>
+                <li><a href="#shoes" onclick="filterCategory('shoes')">Shoes</a></li>
+                <li><a href="#watches" onclick="filterCategory('watches')">Watches</a></li>
+            </ul>
+        </nav>
+        <div class="nav-actions">
+            <div class="cart-icon">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <div class="cart-badge" id="cartCount">0</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+        <h1>Curated Luxury</h1>
+        <p>Explore exclusive collections from world-renowned brands at SHAH's Company.</p>
+    </section>
+
+    <!-- Brand Filter Bar -->
+    <div class="filter-container">
+        <button class="filter-btn active" onclick="filterCategory('all', event)">All Brands</button>
+        <button class="filter-btn" onclick="filterCategory('perfumes', event)">Perfumes</button>
+        <button class="filter-btn" onclick="filterCategory('shirts', event)">Shirts</button>
+        <button class="filter-btn" onclick="filterCategory('shoes', event)">Shoes</button>
+        <button class="filter-btn" onclick="filterCategory('watches', event)">Timepieces</button>
+    </div>
+
+    <!-- Main Store Section -->
+    <main class="store-container">
+
+        <!-- Condition 1: Perfumes (J. & Versace) -->
+        <section class="category-section" id="perfumes">
+            <div class="section-header">
+                <h2>Fragrances</h2>
+                <span>Featuring J. & Versace</span>
+            </div>
+            <div class="products-grid" id="grid-perfumes"></div>
+        </section>
+
+        <!-- Condition 2: Shirts (Outfitters & Royal Tag) -->
+        <section class="category-section" id="shirts">
+            <div class="section-header">
+                <h2>Apparel</h2>
+                <span>Featuring Outfitters & Royal Tag</span>
+            </div>
+            <div class="products-grid" id="grid-shirts"></div>
+        </section>
+
+        <!-- Condition 3: Shoes (Ndure & Borjan) -->
+        <section class="category-section" id="shoes">
+            <div class="section-header">
+                <h2>Footwear</h2>
+                <span>Featuring Ndure & Borjan</span>
+            </div>
+            <div class="products-grid" id="grid-shoes"></div>
+        </section>
+
+        <!-- Condition 4: Watches (Rolex & Omega) -->
+        <section class="category-section" id="watches">
+            <div class="section-header">
+                <h2>Luxury Watches</h2>
+                <span>Featuring Rolex & Omega</span>
+            </div>
+            <div class="products-grid" id="grid-watches"></div>
+        </section>
+
+    </main>
+
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
